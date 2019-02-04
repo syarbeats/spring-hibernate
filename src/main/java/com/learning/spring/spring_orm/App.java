@@ -1,5 +1,7 @@
 package com.learning.spring.spring_orm;
 
+import java.util.List;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -15,6 +17,11 @@ public class App
        //empDao.saveEmployee(new Employee(204, "Ringgo Start", 57000));
        empDao.updateEmployeeName(204, "Ringgo Star");
        Employee emp = empDao.getEmployeeData(204);
-       System.out.println("Employee:"+emp.getName()+" ,Salary: "+emp.getSalary());
+       //System.out.println("Employee:"+emp.getName()+" ,Salary: "+emp.getSalary());
+       List<Employee> empList = empDao.getListEmployee();
+       
+       for(Employee employee:empList) {
+    	   System.out.println("Employee:"+employee.getName()+", Salary:"+employee.getSalary());
+       }
     }
 }

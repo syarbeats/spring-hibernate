@@ -33,85 +33,16 @@ public class EmployeeDao extends HibernateDaoSupport{
 		getHibernateTemplate().update(emp);
 	}
 	
-	/*
-	 * SPRING JDBC INSERT
-	 * **/
-	public void addEmployee(int id, String name, int salary) {
-		
-	}
-	
-	public int updateEmployee(Employee emp) {
-		return 0;
-	
-	}
-	
-	public boolean isEmployeeExist(int id) {
-		return false;	
-	}
-	
-	/*
-	 * SPRING JDBC - CALL MYSQL STORE PROCEDURE
-	 * **/
+
 	@SuppressWarnings("unchecked")
-	public List<Employee> getAllEmployee(){
-		return null;
-		
-	}
-	
-	/*
-	 * SPRING STOREDPROCEDUE CLASS
-	 * **/
-	public int getEmployeeCount(){
-		
-		return 0;
-	}
-	
-	/*
-	 * JDBC TEMPLATE NAMED PARAMETER
-	 * **/
-	public void updateSalary(int employeeId, int salary) {
-		
-	}
-	
-	/*
-	 * Handling binary file (BLOB) in Spring JDBC
-	 * **/
-	public void updateEmployeePhoto(int id, byte[] photo) {
-		
-	}
-	
-	/*
-	 * Handling Character Large Object (CLOB) in Spring JDBC
-	 * **/
-	public void updateEmployeWorkingHistory(int id, String workingHistory) {
-		
-	}
-	
-	/*
-	 * BATCH UPDATE IN SPRING JDBC
-	 * **/
-	public void batchUpdateEmployee(List<Employee> emp) {
-			
-	}
-	
-	public int deleteEmployee(Employee emp) {
-		
-		return 0;
-	}
-
-	/*
-	 * JDBC TEMPLATE ROW MAPPER
-	 * */
 	public List<Employee> getListEmployee() {
-		return null;
-	}
+		List<Employee> empList = (List<Employee>) getHibernateTemplate().find("from Employee");
 
-	/*
-	 * JDBC TEMPLATE RESULT SET EXTRACTOR
-	 * */
-	public List<Employee> getListEmployees(){
-		return null;
-		
+		if(empList.size() != 0) {
+			return empList;
+		}else {
+			return null;
+		}	
 	}
 	
 	/*
