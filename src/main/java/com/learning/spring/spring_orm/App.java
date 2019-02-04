@@ -14,10 +14,10 @@ public class App
     {
        ApplicationContext ctx =  new ClassPathXmlApplicationContext("META-INF/application-context.xml");
        EmployeeDao empDao = (EmployeeDao) ctx.getBean("empDao");
-       //empDao.saveEmployee(new Employee(204, "Ringgo Start", 57000));
+       empDao.saveEmployee(new Employee(204, "Ringgo Start", 57000));
        empDao.updateEmployeeName(204, "Ringgo Star");
        Employee emp = empDao.getEmployeeData(204);
-       //System.out.println("Employee:"+emp.getName()+" ,Salary: "+emp.getSalary());
+       System.out.println("Employee:"+emp.getName()+" ,Salary: "+emp.getSalary());
        List<Employee> empList = empDao.getListEmployee();
        
        for(Employee employee:empList) {
