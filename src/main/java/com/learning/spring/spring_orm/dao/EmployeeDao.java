@@ -7,9 +7,12 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.learning.spring.spring_orm.entity.Employee;
 
+
+/*
+ * DAO CLASS USING HIBERNATEDAOSUPPORT
+ * **/
 public class EmployeeDao extends HibernateDaoSupport{
 	
 	private Logger logger = Logger.getLogger(EmployeeDao.class);
@@ -21,6 +24,13 @@ public class EmployeeDao extends HibernateDaoSupport{
 	@Transactional(readOnly=false)
 	public void saveEmployee(Employee emp) {
 		getHibernateTemplate().save(emp);
+	}
+	
+	@Transactional(readOnly=false)
+	public void updateEmployeeName(int id, String name) {
+		Employee emp = this.getEmployeeData(id);
+		emp.setName(name);
+		getHibernateTemplate().update(emp);
 	}
 	
 	/*
@@ -107,9 +117,18 @@ public class EmployeeDao extends HibernateDaoSupport{
 	/*
 	 * JDBC TEMPLATE PREPARED STATEMENT
 	 * */
-	public List<Employee> getEmployeeData(int id) {
-		return null;
+	@SuppressWarnings("deprecation")
+	public Employee getEmployeeData(int id) {
 		
+		@SuppressWarnings("unchecked")
+		List<Employee> empList = (List<Employee>) getHibernateTemplate().find("from Employee e where e.id ="+id);
+		
+		if(empList.size() != 0) {
+			System.out.println("Employee Name:"+empList.get(0).getName());
+			return empList.get(0);
+		}else {
+			return null;
+		}		
 	}
 
 }
